@@ -1,4 +1,4 @@
-# CalculatorApp
+# Calculator
 ## Overview
 This is a simple JavaFX calculator application that can perform basic arithmetic operations.
 
