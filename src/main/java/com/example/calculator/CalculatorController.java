@@ -1,161 +1,134 @@
 package com.example.calculator;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.application.Platform;
 
 public class CalculatorController {
 
     Calculator calc = new Calculator();
 
     @FXML
-    private TextField inputField;
+    private TextField weight;
 
     @FXML
-    protected void onButtonPlusClick(){
-
-        calc.setOperator('+');
-
-        String val = inputField.getText(); // val = "21"
-        // convert val to d double
-
-        double d = Double.parseDouble(val);
-
-        calc.setOp1(d);
-
-        inputField.setText("");
-
-    }
+    private TextField height;
     @FXML
-    protected void onButtonMinusClick(){
-
-        calc.setOperator('-');
-
-        String val = inputField.getText(); // val = "21"
-        // convert val to d double
-
-        double d = Double.parseDouble(val);
-
-        calc.setOp1(d);
-
-        inputField.setText("");
-
-    }
-    @FXML
-    protected void onButtonResetClick(){
-        calc.reset();
-        inputField.setText("");
-    }
-    @FXML
-    protected void onButtonDivideClick(){
-
-
-        calc.setOperator('/');
-
-        String val = inputField.getText(); // val = "21"
-        // convert val to d double
-
-        double d = Double.parseDouble(val);
-
-        calc.setOp1(d);
-
-
-
-        inputField.setText("");
-
-    }
-    @FXML
-    protected void onButtonMultiplyClick(){
-
-        calc.setOperator('*');
-
-        String val = inputField.getText(); // val = "21"
-        // convert val to d double
-
-        double d = Double.parseDouble(val);
-
-        calc.setOp1(d);
-
-        inputField.setText("");
-
-    }
+    public Label label;
 
     @FXML
-    protected void onButtonEqualClick(){
+    public MenuBar menu;
 
-        String val = inputField.getText();
-        double d = Double.parseDouble(val);
+    @FXML
+    public MenuItem clear;
 
-        calc.setOp2(d);
+    @FXML
+    public MenuItem exit;
 
+    @FXML
+    public MenuItem about;
+
+
+
+    @FXML
+    public Label lab1;
+
+
+
+
+    @FXML
+    protected void onButtonEngClick(){
+
+        calc.setChoice(1);
         calc.calculate();
 
-        d = calc.getResult();
-        inputField.setText(Double.toString(d));
+
+        String val = weight.getText(); // val = "21"
+        // convert val to d double
+        String vall = height.getText(); // val = "21"
+        // convert val to d double
+
+
+        double d = Double.parseDouble(val);
+        double c = Double.parseDouble(vall);
+
+        calc.setWeight(d);
+        calc.setHeight(c);
+
+        if(calc.getResult()<18.5){
+            lab1.setText("Underweight");
+        } else if (18.5 < calc.getResult() && calc.getResult() < 24.9) {
+            lab1.setText("Normal");
+        } else if (25 < calc.getResult() && calc.getResult() < 29.9) {
+            lab1.setText("Overweight");
+        } else{
+            lab1.setText("Obese");
+        }
+
+        label.setText(String.valueOf(calc.getResult()));
+
+
+
+
+    }
+    @FXML
+    protected void onButtonMetricClick(){
+
+        calc.setChoice(2);
+        calc.calculate();
+
+        String val = weight.getText(); // val = "21"
+        // convert val to d double
+        String vall = height.getText(); // val = "21"
+
+        double d = Double.parseDouble(val);
+        double c = Double.parseDouble(vall);
+
+        calc.setWeight(d);
+        calc.setHeight(c);
+
+        if(calc.getResult()<18.5){
+            lab1.setText("Underweight");
+        } else if (18.5 < calc.getResult() && calc.getResult() < 24.9) {
+            lab1.setText("Normal");
+        } else if (25 < calc.getResult() && calc.getResult() < 29.9) {
+            lab1.setText("Overweight");
+        } else if(29.9 < calc.getResult()){
+            lab1.setText("Obese");
+        }else{
+            System.out.println("Invalid input");
+        }
+
+
+        label.setText(String.valueOf(calc.getResult()));
+
+    }
+    @FXML
+    protected void onMenuClearClick(){
+        weight.setText("");
+        height.setText("");
+        label.setText("");
+        lab1.setText("");
+    }
+
+    @FXML
+    protected void onMenuExitClick(){
+        Platform.exit();
+
+
 
     }
 
     @FXML
-    protected void onButtonOneClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "1" );
+    protected void onMenuAboutClick(){
+        label.setText("Enter your weight and height, then click 'metric units' or 'English'");
+        lab1.setText("The BMI and status will be displayed. Use 'File' menu to exit or clear the fields.");
     }
 
-    @FXML
-    protected void onButtonTwoClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "2" );
-    }
-    @FXML
-    protected void onButtonThreeClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "3" );
-    }
 
-    @FXML
-    protected void onButtonFourClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "4" );
-    }
-    @FXML
-    protected void onButtonFiveClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "5" );
-    }
-    @FXML
-    protected void onButtonSixClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "6" );
-    }
-    @FXML
-    protected void onButtonSevenClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "7" );
-    }
-    @FXML
-    protected void onButtonEightClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "8" );
-    }
-    @FXML
-    protected void onButtonNineClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "9" );
-    }
-    @FXML
-    protected void onButtonZeroClick(){
-        String val = inputField.getText();
-        if(val.equals("0")) val="";
-        inputField.setText( val + "0" );
-    }
 
 
 }
